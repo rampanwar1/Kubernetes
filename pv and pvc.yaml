@@ -1,0 +1,30 @@
+calypso@master-node:~:cat pv.yaml 
+---
+#Creating persistentVolume
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgress-pv-volume-test
+  namespace: test
+spec:
+  storageClassName: nginx
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/data/nginx"
+---
+#Claming PersistentVolume
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgress-pv-claim
+  namespace: test
+spec:
+  storageClassName: nginx
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5
